@@ -29,3 +29,25 @@ btnRegistrar.addEventListener("click", () => {
     const persona = new Persona(nombre, apellido);
     document.getElementById("nombreCompleto").value = persona.getNombreCompleto();
 });
+
+
+function obtenerFecha(callback) {
+    const fecha = new Date();
+    callback(fecha);
+}
+
+function mostrarFecha() {
+    return new Promise((resolve) => {
+        obtenerFecha((fecha) => {
+            resolve(fecha.toLocaleString());
+        });
+    });
+}
+
+setInterval(() => {
+    mostrarFecha().then(fecha => {
+        document.getElementById("fechaActual").value = fecha;
+    });
+}, 60000);
+
+
