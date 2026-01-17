@@ -3,30 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <title>Formulario Web</title>
-    <link rel="stylesheet" href="css/styles.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            position: relative;
+        }
+
+        
+        header {
+            background-color: #2fa4dc;
+            padding: 15px;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .header-content h2 {
+            color: white;
+            margin: 0;
+        }
+
+        .user-icon {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background-color: white;
+        }
+
+       
+        .container {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            min-height: 80vh;
+        }
+
+        aside {
+            background-color: #6f8f6a;
+            padding: 20px;
+            color: white;
+        }
+
+        main {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            position: relative;
+        }
+
+        section {
+            flex: 1;
+            border: 3px solid green;
+            padding: 20px;
+        }
+
+        .divider {
+            width: 5px;
+            background-color: green;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 5px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 8px;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        .btn-multi {
+            background-color: #6dbd2f;
+        }
+
+        .btn-registro {
+            background-color: #a0002a;
+        }
+
+        
+        footer {
+            background-color: #2fa4dc;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+
+        
+        .user-bottom {
+            position: absolute;
+            right: 30px;
+            bottom: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: white;
+        }
+    </style>
 </head>
 <body>
 
-<header class="header">
-    <h1>[NOMBRE]</h1>
+<header>
+    <div class="header-content">
+        <h2>JOSUE EDGARDO CENTENO GUEVARA</h2>
+    </div>
+    
+    <img 
+        class="user-icon"
+        src="data:image/svg+xml;utf8,
+        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
+            <circle cx='32' cy='20' r='14' fill='%232fa4dc'/>
+            <rect x='12' y='38' width='40' height='22' rx='11' fill='%232fa4dc'/>
+        </svg>">
 </header>
 
 <div class="container">
-    <aside class="menu">
+    <aside>
         <p>Menu 1</p>
         <p>Menu 2</p>
     </aside>
 
-    <main class="content">
-        <section class="box">
+    <main>
+        
+        <section>
             <h3>Formulario para Multiplicar</h3>
+
             <label>Número 1</label>
             <input type="number" id="num1">
 
             <label>Número 2</label>
             <input type="number" id="num2">
 
-            <button id="btnMultiplicar">Multiplicar</button>
+            <button class="btn-multi" id="btnMultiplicar">Multiplicar</button>
 
             <label>Resultado</label>
             <input type="text" id="resultado" readonly>
@@ -35,26 +162,92 @@
             <input type="text" id="fechaActual" readonly>
         </section>
 
-        <section class="box">
+        <div class="divider"></div>
+
+       
+        <section>
             <h3>Formulario de registro personal</h3>
+
             <label>Nombre</label>
             <input type="text" id="nombre">
 
             <label>Apellido</label>
             <input type="text" id="apellido">
 
-            <button id="btnRegistrar">Registrar</button>
+            <button class="btn-registro" id="btnRegistrar">Registrar</button>
 
             <label>Nombre completo</label>
             <input type="text" id="nombreCompleto" readonly>
         </section>
+
+        
+        <img 
+            class="user-bottom"
+            src="data:image/svg+xml;utf8,
+            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>
+                <circle cx='32' cy='20' r='14' fill='%232fa4dc'/>
+                <rect x='12' y='38' width='40' height='22' rx='11' fill='%232fa4dc'/>
+            </svg>">
     </main>
 </div>
 
-<footer class="footer">
-    Derechos reservados a [NOMBRE]
+<footer>
+    Derechos reservados a JOSUE EDGARDO CENTENO GUEVARA
 </footer>
 
-<script src="js/main.js"></script>
+<script>
+    /*MULTIPLICAR*/
+    const btnMultiplicar = document.getElementById("btnMultiplicar");
+
+    btnMultiplicar.addEventListener("click", () => {
+        let n1 = Number(document.getElementById("num1").value);
+        let n2 = Number(document.getElementById("num2").value);
+        document.getElementById("resultado").value = n1 * n2;
+    });
+
+    /* REGISTRO*/
+    class Persona {
+        constructor(nombre, apellido) {
+            this.nombre = nombre;
+            this.apellido = apellido;
+        }
+
+        getNombreCompleto() {
+            return this.nombre + " " + this.apellido;
+        }
+    }
+
+    const btnRegistrar = document.getElementById("btnRegistrar");
+
+    btnRegistrar.addEventListener("click", () => {
+        const nombre = document.getElementById("nombre").value;
+        const apellido = document.getElementById("apellido").value;
+
+        const persona = new Persona(nombre, apellido);
+        document.getElementById("nombreCompleto").value = persona.getNombreCompleto();
+    });
+
+    //FECHA //
+   function obtenerFecha(callback) {
+    const fecha = new Date();
+    callback(fecha);
+}
+
+function mostrarFecha() {
+    return new Promise((resolve) => {
+        obtenerFecha((fecha) => {
+            resolve(fecha.toLocaleString());
+        });
+    });
+}
+
+setInterval(() => {
+    mostrarFecha().then(fecha => {
+        document.getElementById("fechaActual").value = fecha;
+    });
+}, 60000);
+
+</script>
+
 </body>
 </html>
